@@ -1,0 +1,719 @@
+<div class="cron-picker__popup">
+    <div class="tool_area">
+        <div onclick="toggleCronPicker()" class="close">
+            <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path fill="#0D99FF" d="M12 11.293l10.293-10.293.707.707-10.293 10.293 10.293 10.293-.707.707-10.293-10.293-10.293 10.293-.707-.707 10.293-10.293-10.293-10.293.707-.707 10.293 10.293z"/></svg>
+        </div>
+        <div class="one_column_box">
+            <div class="headerPart">Cron expression generator</div>
+            <div class="margin_bottom_10">
+                <input id="generatedCron" type="text" readonly="" autocomplete="off">
+                <a id="btnCopy" class="link white_btn button">Copy</a>
+                <a id="btnReset" class="link white_btn button">Reset</a>
+                <button onclick="save()" class="submit button">Save</button>
+            </div>
+
+            <table class="resultTable margin_bottom_10">
+                <tbody>
+                    <tr>
+                        <td ${ !showSeconds ? 'style="display: none;"' : '' }>Seconds</td>
+                        <td>Minutes</td>
+                        <td>Hours</td>
+                        <td>Day of month</td>
+                        <td>Month</td>
+                        <td>Day of week</td>
+                        <td>Year</td>
+                    </tr>
+                    <tr>
+                        <td ${ !showSeconds ? 'style="display: none;"' : '' } class="col-result"><span id="resultSeconds">*</span></td>
+                        <td class="col-result"><span id="resultMinutes">*</span></td>
+                        <td class="col-result"><span id="resultHours">*</span></td>
+                        <td class="col-result"><span id="resultDayOfMonth">?</span></td>
+                        <td class="col-result"><span id="resultMonth">*</span></td>
+                        <td class="col-result"><span id="resultDayOfWeek">*</span></td>
+                        <td class="col-result"><span id="resultYear">*</span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div id="tabArea">
+                ${ showSeconds ? '<button id="tabSeconds" class="tab white_btn tab_unselected">Seconds</button>' : '' }
+                <button id="tabMinutes" class="tab white_btn">Minutes</button>
+                <button id="tabHours" class="tab white_btn tab_unselected">Hours</button>
+                <button id="tabDay" class="tab white_btn tab_unselected">Day</button>
+                <button id="tabMonth" class="tab white_btn tab_unselected">Month</button>
+                <button id="tabYear" class="tab white_btn tab_unselected">Year</button>
+            </div>
+
+            <div id="tabDetailArea" class="one_column_box">
+                <div id="tabSecondArea" style="display: none;">
+                    <div class="cronOption margin_bottom_10">
+                        <label>
+                            <input name="radioSeconds" type="radio" id="cronSecondOption1" checked="checked">
+                            <span for="cronSecondOption1" class="">Every second</span>
+                        </label>
+                    </div>
+                    <div class="cronOption margin_bottom_10">
+                        <label>
+                            <input name="radioSeconds" type="radio" id="cronSecondOption2">
+                            <span for="cronSecondOption2" class="">Every <select id="cronSecondOption2Value1"
+                                    class="select selectCronSecondOption2">
+                                </select>
+                                second starting at second <select id="cronSecondOption2Value2"
+                                    class="select selectCronSecondOption2">
+                                </select>
+                            </span>
+                        </label>
+                    </div>
+                    <div class="cronOption margin_bottom_5">
+                        <label>
+                            <input name="radioSeconds" type="radio" id="cronSecondOption3">
+                            <span for="cronSecondOption3" class="">Specific second (muliple selectable)</span>
+                        </label>
+                        <div class="specificCheckbox">
+
+                        </div>
+                    </div>
+                    <div class="cronOption margin_bottom_5">
+                        <label>
+                            <input name="radioSeconds" type="radio" id="cronSecondOption4">
+                            <span for="cronSecondOption4" class="">Every second between second <select
+                                    id="cronSecondOption4Value1" class="select selectCronSecondOption4">
+
+                                </select>
+                                and second <select id="cronSecondOption4Value2" class="select selectCronSecondOption4">
+
+                                </select>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <div id="tabMinuteArea" style="display: block;">
+                    <div class="cronOption margin_bottom_10">
+                        <label>
+                            <input name="radioMinutes" type="radio" id="cronMinuteOption1" checked="checked">
+                            <span for="cronMinuteOption1" class="">Every minute</span>
+                        </label>
+                    </div>
+                    <div class="cronOption margin_bottom_10">
+                        <label>
+                            <input name="radioMinutes" type="radio" id="cronMinuteOption2">
+                            <span for="cronMinuteOption2" class="">Every <select id="cronMinuteOption2Value1"
+                                    class="select selectCronMinuteOption2">
+                                </select>
+                                minute starting at minute <select id="cronMinuteOption2Value2"
+                                    class="select selectCronMinuteOption2">
+
+                                </select>
+                            </span>
+                        </label>
+                    </div>
+                    <div class="cronOption margin_bottom_5">
+                        <label>
+                            <input name="radioMinutes" type="radio" id="cronMinuteOption3">
+                            <span for="cronMinuteOption3" class="">Specific minute (choose one or many)</span>
+                        </label>
+                        <div class="specificCheckbox">
+
+                        </div>
+                    </div>
+                    <div class="cronOption margin_bottom_5">
+                        <label>
+                            <input name="radioMinutes" type="radio" id="cronMinuteOption4">
+                            <span for="cronMinuteOption4" class="">Every minute between minute <select
+                                    id="cronMinuteOption4Value1" class="select selectCronMinuteOption4">
+
+                                </select>
+                                and minute <select id="cronMinuteOption4Value2" class="select selectCronMinuteOption4">
+
+                                </select>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <div id="tabHourArea" style="display: none;">
+                    <div class="cronOption margin_bottom_10">
+                        <label>
+                            <input name="radioHours" type="radio" id="cronHourOption1" checked="checked">
+                            <span for="cronHourOption1" class="">Every hour</span>
+                        </label>
+                    </div>
+                    <div class="cronOption margin_bottom_10">
+                        <label>
+                            <input name="radioHours" type="radio" id="cronHourOption2">
+                            <span for="cronHourOption2" class="">Every <select id="cronHourOption2Value1"
+                                    class="select selectCronHourOption2">
+
+                                </select>
+                                hour starting at hour <select id="cronHourOption2Value2"
+                                    class="select selectCronHourOption2">
+
+                                </select>
+                            </span>
+                        </label>
+                    </div>
+                    <div class="cronOption margin_bottom_5">
+                        <label>
+                            <input name="radioHours" type="radio" id="cronHourOption3">
+                            <span for="cronHourOption3" class="">Specific hour (choose one or many)</span>
+                        </label>
+                        <div class="specificCheckbox">
+
+                        </div>
+                    </div>
+                    <div class="cronOption margin_bottom_5">
+                        <label>
+                            <input name="radioHours" type="radio" id="cronHourOption4">
+                            <span for="cronHourOption4" class="">Every hour between hour <select
+                                    id="cronHourOption4Value1" class="select selectCronHourOption4">
+
+                                </select>
+                                and hour <select id="cronHourOption4Value2" class="select selectCronHourOption4">
+
+                                </select>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <div id="tabDayArea" style="display: none;">
+                    <div class="cronOption margin_bottom_10">
+                        <label>
+                            <input name="radioDay" type="radio" id="cronDayOption1" checked="checked">
+                            <span for="cronDayOption1" class="">Every day</span>
+                        </label>
+                    </div>
+                    <div class="cronOption margin_bottom_10">
+                        <label>
+                            <input name="radioDay" type="radio" id="cronDayOption2">
+                            <span for="cronDayOption2" class="">Every <select id="cronDayOption2Value1"
+                                    class="select selectCronDayOption2">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                </select>
+                                day starting on <select id="cronDayOption2Value2" class="select selectCronDayOption2">
+                                    <option value="1">Sunday</option>
+                                    <option value="2">Monday</option>
+                                    <option value="3">Tuesday</option>
+                                    <option value="4">Wednesday</option>
+                                    <option value="5">Thursday</option>
+                                    <option value="6">Friday</option>
+                                    <option value="7">Saturday</option>
+                                </select>
+                            </span>
+                        </label>
+                    </div>
+                    <div class="cronOption margin_bottom_10">
+                        <label>
+                            <input name="radioDay" type="radio" id="cronDayOption3">
+                            <span for="cronDayOption3" class="">Every <select id="cronDayOption3Value1"
+                                    class="select selectCronDayOption3">
+
+                                </select>
+                                day starting on the <select id="cronDayOption3Value2"
+                                    class="select selectCronDayOption3">
+                                    <option value="1">1st</option>
+                                    <option value="2">2nd</option>
+                                    <option value="3">3rd</option>
+                                    <option value="4">
+                                        4th </option>
+                                    <option value="5">
+                                        5th </option>
+                                    <option value="6">
+                                        6th </option>
+                                    <option value="7">
+                                        7th </option>
+                                    <option value="8">
+                                        8th </option>
+                                    <option value="9">
+                                        9th </option>
+                                    <option value="10">
+                                        10th </option>
+                                    <option value="11">
+                                        11th </option>
+                                    <option value="12">
+                                        12th </option>
+                                    <option value="13">
+                                        13th </option>
+                                    <option value="14">
+                                        14th </option>
+                                    <option value="15">
+                                        15th </option>
+                                    <option value="16">
+                                        16th </option>
+                                    <option value="17">
+                                        17th </option>
+                                    <option value="18">
+                                        18th </option>
+                                    <option value="19">
+                                        19th </option>
+                                    <option value="20">
+                                        20th </option>
+                                    <option value="21">21st</option>
+                                    <option value="22">22nd</option>
+                                    <option value="23">23rd</option>
+                                    <option value="24">
+                                        24th </option>
+                                    <option value="25">
+                                        25th </option>
+                                    <option value="26">
+                                        26th </option>
+                                    <option value="27">
+                                        27th </option>
+                                    <option value="28">
+                                        28th </option>
+                                    <option value="29">
+                                        29th </option>
+                                    <option value="30">
+                                        30th </option>
+                                    <option value="31">31st</option>
+                                </select>
+                            </span>
+                        </label>
+                    </div>
+                    <div class="cronOption margin_bottom_5">
+                        <label>
+                            <input name="radioDay" type="radio" id="cronDayOption4">
+                            <span for="cronDayOption4" class="">Specific day of week (choose one or many)</span>
+                        </label>
+                        <div class="specificCheckbox">
+                            <div class="checkBox2">
+                                <label>
+                                    <input type="checkbox" id="cronDowSun" name="cronDowSpecificSpecific"
+                                        class="checkBox checkBoxCronDayOption4" value="SUN" checked="true">
+                                    <span for="cronDowSun" class="nofloat">Sunday</span>
+                                </label>
+                            </div>
+                            <div class="checkBox2">
+                                <label>
+                                    <input type="checkbox" id="cronDowMon" name="cronDowSpecificSpecific"
+                                        class="checkBox checkBoxCronDayOption4" value="MON">
+                                    <span for="cronDowMon" class="nofloat">Monday</span>
+                                </label>
+                            </div>
+                            <div class="checkBox2">
+                                <label>
+                                    <input type="checkbox" id="cronDowTue" name="cronDowSpecificSpecific"
+                                        class="checkBox checkBoxCronDayOption4" value="TUE">
+                                    <span for="cronDowTue" class="nofloat">Tuesday</span>
+                                </label>
+                            </div>
+                            <div class="checkBox2">
+                                <label>
+                                    <input type="checkbox" id="cronDowWed" name="cronDowSpecificSpecific"
+                                        class="checkBox checkBoxCronDayOption4" value="WED">
+                                    <span for="cronDowWed" class="nofloat">Wednesday</span>
+                                </label>
+                            </div>
+                            <div class="checkBox2">
+                                <label>
+                                    <input type="checkbox" id="cronDowThu" name="cronDowSpecificSpecific"
+                                        class="checkBox checkBoxCronDayOption4" value="THU">
+                                    <span for="cronDowThu" class="nofloat">Thursday</span>
+                                </label>
+                            </div>
+                            <div class="checkBox2">
+                                <label>
+                                    <input type="checkbox" id="cronDowFri" name="cronDowSpecificSpecific"
+                                        class="checkBox checkBoxCronDayOption4" value="FRI">
+                                    <span for="cronDowFri" class="nofloat">Friday</span>
+                                </label>
+                            </div>
+                            <div class="checkBox2">
+                                <label>
+                                    <input type="checkbox" id="cronDowSat" name="cronDowSpecificSpecific"
+                                        class="checkBox checkBoxCronDayOption4" value="SAT">
+                                    <span for="cronDowSat" class="nofloat">Saturday</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cronOption margin_bottom_5">
+                        <label>
+                            <input name="radioDay" type="radio" id="cronDayOption5">
+                            <span for="cronDayOption5" class="">Specific day of month (choose one or many)</span>
+                        </label>
+                        <div class="specificCheckbox days">
+
+
+                        </div>
+                    </div>
+                    <div class="cronOption margin_bottom_10">
+                        <label>
+                            <input name="radioDay" type="radio" id="cronDayOption6">
+                            <span for="cronDayOption6" class="">on the last day of the month</span>
+                        </label>
+                    </div>
+                    <div class="cronOption margin_bottom_10">
+                        <label>
+                            <input name="radioDay" type="radio" id="cronDayOption7">
+                            <span for="cronDayOption7" class="">on the last week of the month</span>
+                        </label>
+                    </div>
+                    <div class="cronOption margin_bottom_10">
+                        <label>
+                            <input name="radioDay" type="radio" id="cronDayOption8">
+                            <span for="cronDayOption8" class="">on the last <select id="cronDayOption8Value"
+                                    class="select selectCronDayOption8">
+                                    <option value="1">Sunday</option>
+                                    <option value="2">Monday</option>
+                                    <option value="3">Tuesday</option>
+                                    <option value="4">Wednesday</option>
+                                    <option value="5">Thursday</option>
+                                    <option value="6">Friday</option>
+                                    <option value="7">Saturday</option>
+                                </select>
+                                of the month </span>
+                        </label>
+                    </div>
+                    <div class="cronOption margin_bottom_10">
+                        <label>
+                            <input name="radioDay" type="radio" id="cronDayOption9">
+                            <span for="cronDayOption9" class="">
+                                <select id="cronDayOption9Value" class="select selectCronDayOption9">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                    <option value="21">21</option>
+                                    <option value="22">22</option>
+                                    <option value="23">23</option>
+                                    <option value="24">24</option>
+                                    <option value="25">25</option>
+                                    <option value="26">26</option>
+                                    <option value="27">27</option>
+                                    <option value="28">28</option>
+                                    <option value="29">29</option>
+                                    <option value="30">30</option>
+                                    <option value="31">31</option>
+                                </select>
+                                days before the end of the month </span>
+                        </label>
+                    </div>
+                    <div class="cronOption margin_bottom_10">
+                        <label>
+                            <input name="radioDay" type="radio" id="cronDayOption10">
+                            <span for="cronDayOption10" class="">nearest weekday (Monday to Friday) to the <select
+                                    id="cronDayOption10Value" class="select selectCronDayOption10">
+                                    <option value="1">1st</option>
+                                    <option value="2">2nd</option>
+                                    <option value="3">3rd</option>
+                                    <option value="4">
+                                        4th </option>
+                                    <option value="5">
+                                        5th </option>
+                                    <option value="6">
+                                        6th </option>
+                                    <option value="7">
+                                        7th </option>
+                                    <option value="8">
+                                        8th </option>
+                                    <option value="9">
+                                        9th </option>
+                                    <option value="10">
+                                        10th </option>
+                                    <option value="11">
+                                        11th </option>
+                                    <option value="12">
+                                        12th </option>
+                                    <option value="13">
+                                        13th </option>
+                                    <option value="14">
+                                        14th </option>
+                                    <option value="15">
+                                        15th </option>
+                                    <option value="16">
+                                        16th </option>
+                                    <option value="17">
+                                        17th </option>
+                                    <option value="18">
+                                        18th </option>
+                                    <option value="19">
+                                        19th </option>
+                                    <option value="20">
+                                        20th </option>
+                                    <option value="21">21st</option>
+                                    <option value="22">22nd</option>
+                                    <option value="23">23rd</option>
+                                    <option value="24">
+                                        24th </option>
+                                    <option value="25">
+                                        25th </option>
+                                    <option value="26">
+                                        26th </option>
+                                    <option value="27">
+                                        27th </option>
+                                    <option value="28">
+                                        28th </option>
+                                    <option value="29">
+                                        29th </option>
+                                    <option value="30">
+                                        30th </option>
+                                    <option value="31">31st</option>
+                                </select>
+                                of the month </span>
+                        </label>
+                    </div>
+                    <div class="cronOption margin_bottom_5">
+                        <label>
+                            <input name="radioDay" type="radio" id="cronDayOption11">
+                            <span for="cronDayOption11" class="">on the <select id="cronDayOption11Value1"
+                                    class="select selectCronDayOption11">
+                                    <option value="1">1st</option>
+                                    <option value="2">2nd</option>
+                                    <option value="3">3rd</option>
+                                    <option value="4">4th</option>
+                                    <option value="5">5th</option>
+                                </select>
+                                <select id="cronDayOption11Value2" class="select selectCronDayOption11">
+                                    <option value="1">Sunday</option>
+                                    <option value="2">Monday</option>
+                                    <option value="3">Tuesday</option>
+                                    <option value="4">Wednesday</option>
+                                    <option value="5">Thursday</option>
+                                    <option value="6">Friday</option>
+                                    <option value="7">Saturday</option>
+                                </select>
+                                of the month </span>
+                        </label>
+                    </div>
+                </div>
+
+                <div id="tabMonthArea" style="display: none;">
+                    <div class="cronOption margin_bottom_10">
+                        <label>
+                            <input name="radioMonth" type="radio" id="cronMonthOption1" checked="checked">
+                            <span for="cronMonthOption1" class="">Every month</span>
+                        </label>
+                    </div>
+                    <div class="cronOption margin_bottom_10">
+                        <label>
+                            <input name="radioMonth" type="radio" id="cronMonthOption2">
+                            <span for="cronMonthOption2" class="">Every <select id="cronMonthOption2Value1"
+                                    class="select selectCronMonthOption2">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                </select>
+                                months starting at month <select id="cronMonthOption2Value2"
+                                    class="select selectCronMonthOption2">
+                                    <option value="1">January</option>
+                                    <option value="2">February</option>
+                                    <option value="3">March</option>
+                                    <option value="4">April</option>
+                                    <option value="5">May</option>
+                                    <option value="6">June</option>
+                                    <option value="7">July</option>
+                                    <option value="8">August</option>
+                                    <option value="9">September</option>
+                                    <option value="10">October</option>
+                                    <option value="11">November</option>
+                                    <option value="12">December</option>
+                                </select>
+                            </span>
+                        </label>
+                    </div>
+                    <div class="cronOption margin_bottom_5">
+                        <label>
+                            <input name="radioMonth" type="radio" id="cronMonthOption3">
+                            <span for="cronMonthOption3" class="">Specific month (choose one or many)</span>
+                        </label>
+                        <div class="specificCheckbox">
+                            <div class="checkBox checkBoxWidth">
+                                <label>
+                                    <input type="checkbox" id="cronMonth1" name="cronMonthSpecific"
+                                        class="checkBox checkBoxCronMonthOption3" value="JAN" checked="true">
+                                    <span for="cronMonth1" class="nofloat">January&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                </label>
+                            </div>
+                            <div class="checkBox checkBoxWidth">
+                                <label>
+                                    <input type="checkbox" id="cronMonth2" name="cronMonthSpecific"
+                                        class="checkBox checkBoxCronMonthOption3" value="FEB">
+                                    <span for="cronMonth2" class="nofloat">February&nbsp;&nbsp;</span>
+                                </label>
+                            </div>
+                            <div class="checkBox checkBoxWidth">
+                                <label>
+                                    <input type="checkbox" id="cronMonth3" name="cronMonthSpecific"
+                                        class="checkBox checkBoxCronMonthOption3" value="MAR">
+                                    <span for="cronMonth3" class="nofloat">March</span>
+                                </label>
+                            </div>
+                            <div class="checkBox checkBoxWidth">
+                                <label>
+                                    <input type="checkbox" id="cronMonth4" name="cronMonthSpecific"
+                                        class="checkBox checkBoxCronMonthOption3" value="APR">
+                                    <span for="cronMonth4" class="nofloat">April</span>
+                                </label>
+                            </div>
+                            <div class="checkBox checkBoxWidth">
+                                <label>
+                                    <input type="checkbox" id="cronMonth5" name="cronMonthSpecific"
+                                        class="checkBox checkBoxCronMonthOption3" value="MAY">
+                                    <span for="cronMonth5" class="nofloat">May</span>
+                                </label>
+                            </div>
+                            <div class="checkBox checkBoxWidth">
+                                <label>
+                                    <input type="checkbox" id="cronMonth6" name="cronMonthSpecific"
+                                        class="checkBox checkBoxCronMonthOption3" value="JUN">
+                                    <span for="cronMonth6" class="nofloat">June</span>
+                                </label>
+                            </div>
+                            <div class="checkBox checkBoxWidth">
+                                <label>
+                                    <input type="checkbox" id="cronMonth7" name="cronMonthSpecific"
+                                        class="checkBox checkBoxCronMonthOption3" value="JUL">
+                                    <span for="cronMonth7" class="nofloat">July</span>
+                                </label>
+                            </div>
+                            <div class="checkBox checkBoxWidth">
+                                <label>
+                                    <input type="checkbox" id="cronMonth8" name="cronMonthSpecific"
+                                        class="checkBox checkBoxCronMonthOption3" value="AUG">
+                                    <span for="cronMonth8" class="nofloat">August</span>
+                                </label>
+                            </div>
+                            <div class="checkBox checkBoxWidth">
+                                <label>
+                                    <input type="checkbox" id="cronMonth9" name="cronMonthSpecific"
+                                        class="checkBox checkBoxCronMonthOption3" value="SEP">
+                                    <span for="cronMonth9" class="nofloat">September</span>
+                                </label>
+                            </div>
+                            <div class="checkBox checkBoxWidth">
+                                <label>
+                                    <input type="checkbox" id="cronMonth10" name="cronMonthSpecific"
+                                        class="checkBox checkBoxCronMonthOption3" value="OCT">
+                                    <span for="cronMonth10" class="nofloat">October</span>
+                                </label>
+                            </div>
+                            <div class="checkBox checkBoxWidth">
+                                <label>
+                                    <input type="checkbox" id="cronMonth11" name="cronMonthSpecific"
+                                        class="checkBox checkBoxCronMonthOption3" value="NOV">
+                                    <span for="cronMonth11" class="nofloat">November</span>
+                                </label>
+                            </div>
+                            <div class="checkBox checkBoxWidth">
+                                <label>
+                                    <input type="checkbox" id="cronMonth12" name="cronMonthSpecific"
+                                        class="checkBox checkBoxCronMonthOption3" value="DEC">
+                                    <span for="cronMonth12" class="nofloat">December</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cronOption margin_bottom_5">
+                        <label>
+                            <input name="radioMonth" type="radio" id="cronMonthOption4">
+                            <span for="cronMonthOption4" class="">Every month between month <select
+                                    id="cronMonthOption4Value1" class="select selectCronMonthOption4">
+                                    <option value="1">January</option>
+                                    <option value="2">February</option>
+                                    <option value="3">March</option>
+                                    <option value="4">April</option>
+                                    <option value="5">May</option>
+                                    <option value="6">June</option>
+                                    <option value="7">July</option>
+                                    <option value="8">August</option>
+                                    <option value="9">September</option>
+                                    <option value="10">October</option>
+                                    <option value="11">November</option>
+                                    <option value="12">December</option>
+                                </select>
+                                and month <select id="cronMonthOption4Value2" class="select selectCronMonthOption4">
+                                    <option value="1">January</option>
+                                    <option value="2">February</option>
+                                    <option value="3">March</option>
+                                    <option value="4">April</option>
+                                    <option value="5">May</option>
+                                    <option value="6">June</option>
+                                    <option value="7">July</option>
+                                    <option value="8">August</option>
+                                    <option value="9">September</option>
+                                    <option value="10">October</option>
+                                    <option value="11">November</option>
+                                    <option value="12">December</option>
+                                </select>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <div id="tabYearArea" style="display: none;">
+                    <div class="cronOption margin_bottom_10">
+                        <label>
+                            <input name="radioYear" type="radio" id="cronYearOption1" checked="checked">
+                            <span for="cronYearOption1" class="">Every year</span>
+                        </label>
+                    </div>
+                    <div class="cronOption margin_bottom_10">
+                        <label>
+                            <input name="radioYear" type="radio" id="cronYearOption2">
+                            <span for="cronYearOption2" class="">Every <select id="cronYearOption2Value1"
+                                    class="select selectCronYearOption2">
+
+                                </select>
+                                years starting at year <select id="cronYearOption2Value2"
+                                    class="select selectCronYearOption2">
+
+                                </select>
+                            </span>
+                        </label>
+                    </div>
+                    <div class="cronOption margin_bottom_5">
+                        <label>
+                            <input name="radioYear" type="radio" id="cronYearOption3">
+                            <span for="cronYearOption3" class="">Specific year (choose one or many)</span>
+                        </label>
+                        <div class="specificCheckbox"></div>
+                    </div>
+                    <div class="cronOption margin_bottom_5">
+                        <label>
+                            <input name="radioYear" type="radio" id="cronYearOption4">
+                            <span for="cronYearOption4" class="">Every year between year <select
+                                    id="cronYearOption4Value1" class="select selectCronYearOption4">
+                                </select>
+                                and year <select id="cronYearOption4Value2" class="select selectCronYearOption4">
+                                </select>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
