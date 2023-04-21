@@ -39,7 +39,7 @@ export default class CronPickerData {
             id: 'default',
             name: 'Default',
             content: () =>
-                '<cron-picker app-id="{{appId}}" item-id="{{itemId}}" field-id="{{fieldId}}"></cron-picker>'
+                '<cron-picker app-id="{{appId}}" item-id="{{itemId}}" field-id="{{fieldId}}" value="{{value}}"></cron-picker>'
         }, {
             id: 'value',
             name: 'Value',
