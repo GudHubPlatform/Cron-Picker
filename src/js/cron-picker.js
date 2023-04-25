@@ -50,8 +50,7 @@ export const initCronPicker = (element) => {
         const dayOfMonth = cronPickerPopup.querySelector('#resultDayOfMonth').textContent;
         const month = cronPickerPopup.querySelector('#resultMonth').textContent;
         const dayOfWeek = cronPickerPopup.querySelector('#resultDayOfWeek').textContent;
-        const year = cronPickerPopup.querySelector('#resultYear').textContent;
-        const result = `${seconds} ${minutes} ${hours} ${dayOfMonth} ${month} ${dayOfWeek} ${year}`;
+        const result = `${seconds} ${minutes} ${hours} ${dayOfMonth} ${month} ${dayOfWeek}`;
         cronPickerPopup.querySelector('#generatedCron').value = result;
     }
     
@@ -117,43 +116,29 @@ export const initCronPicker = (element) => {
 
     createCheckBoxes(cronPickerPopup.querySelector('#tabDayArea .specificCheckbox.days'), 1, 31, 'cronDayCheckBox', 'checkBoxCronDayOption5', { zeroPad: true });
 
-    // Years generation
-
-    createOptions(document.getElementById("cronYearOption4Value1"), 2023, 2099);
-    createOptions(document.getElementById("cronYearOption4Value2"), 2023, 2099);
-
-    createOptions(document.getElementById('cronYearOption2Value1'), 1, 100);
-
-    createOptions(document.getElementById("cronYearOption2Value2"), 2023, 2099);
-
-    createCheckBoxes(cronPickerPopup.querySelector('#tabYearArea .specificCheckbox'), 2023, 2099, 'cronYearCheckBox', 'checkBoxCronYearOption3');
-
-
     // Logic
 
-    document.getElementById('generatedCron').value = '* * * ? * * *';
+    document.getElementById('generatedCron').value = '0 * * ? * *';
 
     document.getElementById('btnCopy').addEventListener('click', function () {
         copyText('generatedCron');
     });
 
     document.getElementById("btnReset").addEventListener("click", () => {
-        document.getElementById("generatedCron").value = "* * * ? * * *";
+        document.getElementById("generatedCron").value = "0 * * ? * * *";
 
-        document.getElementById("resultSeconds").textContent = "*";
+        document.getElementById("resultSeconds").textContent = "0";
         document.getElementById("resultMinutes").textContent = "*";
         document.getElementById("resultHours").textContent = "*";
         document.getElementById("resultDayOfMonth").textContent = "?";
         document.getElementById("resultMonth").textContent = "*";
         document.getElementById("resultDayOfWeek").textContent = "*";
-        document.getElementById("resultYear").textContent = "*";
 
-        document.getElementById("cronSecondOption1").checked = true;
+        document.getElementById("cronSecondOption3").checked = true;
         document.getElementById("cronMinuteOption1").checked = true;
         document.getElementById("cronHourOption1").checked = true;
         document.getElementById("cronDayOption1").checked = true;
         document.getElementById("cronMonthOption1").checked = true;
-        document.getElementById("cronYearOption1").checked = true;
 
         document.getElementById("tabMinutes").click();
 
@@ -175,7 +160,6 @@ export const initCronPicker = (element) => {
         document.getElementById("cronDowSun").checked = true;
         document.getElementById("cronDayCheckBox1").checked = true;
         document.getElementById("cronMonth1").checked = true;
-        cronPickerPopup.querySelector(".checkBoxCronYearOption3:first-child").checked = true;
     });
 
     const tabSeconds = document.getElementById("tabSeconds");
@@ -183,14 +167,12 @@ export const initCronPicker = (element) => {
     const tabHours = document.getElementById("tabHours");
     const tabDay = document.getElementById("tabDay");
     const tabMonth = document.getElementById("tabMonth");
-    const tabYear = document.getElementById("tabYear");
 
     const tabSecondArea = document.getElementById("tabSecondArea");
     const tabMinuteArea = document.getElementById("tabMinuteArea");
     const tabHourArea = document.getElementById("tabHourArea");
     const tabDayArea = document.getElementById("tabDayArea");
     const tabMonthArea = document.getElementById("tabMonthArea");
-    const tabYearArea = document.getElementById("tabYearArea");
 
     if(tabSeconds) {
 
@@ -200,8 +182,7 @@ export const initCronPicker = (element) => {
             hideTab(tabHourArea);
             hideTab(tabDayArea);
             hideTab(tabMonthArea);
-            hideTab(tabYearArea);
-            selectTab(tabSeconds, [tabMinutes, tabHours, tabDay, tabMonth, tabYear]);
+            selectTab(tabSeconds, [tabMinutes, tabHours, tabDay, tabMonth]);
         });
 
     }
@@ -214,8 +195,7 @@ export const initCronPicker = (element) => {
         hideTab(tabHourArea);
         hideTab(tabDayArea);
         hideTab(tabMonthArea);
-        hideTab(tabYearArea);
-        selectTab(tabMinutes, [tabSeconds ? tabSeconds : null, tabHours, tabDay, tabMonth, tabYear]);
+        selectTab(tabMinutes, [tabSeconds ? tabSeconds : null, tabHours, tabDay, tabMonth]);
     });
 
     tabHours.addEventListener("click", function () {
@@ -226,8 +206,7 @@ export const initCronPicker = (element) => {
         displayTab(tabHourArea);
         hideTab(tabDayArea);
         hideTab(tabMonthArea);
-        hideTab(tabYearArea);
-        selectTab(tabHours, [tabSeconds ? tabSeconds : null, tabMinutes, tabDay, tabMonth, tabYear]);
+        selectTab(tabHours, [tabSeconds ? tabSeconds : null, tabMinutes, tabDay, tabMonth]);
     });
 
     tabDay.addEventListener("click", function () {
@@ -238,8 +217,7 @@ export const initCronPicker = (element) => {
         hideTab(tabHourArea);
         displayTab(tabDayArea);
         hideTab(tabMonthArea);
-        hideTab(tabYearArea);
-        selectTab(tabDay, [tabSeconds ? tabSeconds : null, tabMinutes, tabHours, tabMonth, tabYear]);
+        selectTab(tabDay, [tabSeconds ? tabSeconds : null, tabMinutes, tabHours, tabMonth]);
     });
 
     tabMonth.addEventListener("click", function () {
@@ -250,20 +228,7 @@ export const initCronPicker = (element) => {
         hideTab(tabHourArea);
         hideTab(tabDayArea);
         displayTab(tabMonthArea);
-        hideTab(tabYearArea);
-        selectTab(tabMonth, [tabSeconds ? tabSeconds : null, tabMinutes, tabHours, tabDay, tabYear]);
-    });
-
-    tabYear.addEventListener("click", function () {
-        if(tabSeconds) {
-            hideTab(tabSecondArea);
-        }
-        hideTab(tabMinuteArea);
-        hideTab(tabHourArea);
-        hideTab(tabDayArea);
-        hideTab(tabMonthArea);
-        displayTab(tabYearArea);
-        selectTab(tabYear, [tabSeconds ? tabSeconds : null, tabMinutes, tabHours, tabDay, tabMonth]);
+        selectTab(tabMonth, [tabSeconds ? tabSeconds : null, tabMinutes, tabHours, tabDay]);
     });
 
     //second event
@@ -454,58 +419,6 @@ export const initCronPicker = (element) => {
     cronPickerPopup.querySelectorAll(".checkBoxCronMonthOption3").forEach((element) => {
         element.addEventListener("change", () => {
             cronPickerPopup.querySelector("#cronMonthOption3").dispatchEvent(new Event('click'));
-        });
-    });
-
-    //year event
-    cronPickerPopup.querySelector("#cronYearOption1").addEventListener("click", () => {
-        cronPickerPopup.querySelector("#resultYear").textContent = "*";
-        updateResult();
-    });
-
-    cronPickerPopup.querySelector("#cronYearOption2").addEventListener("click", () => {
-        const valueEvery = cronPickerPopup.querySelector("#cronYearOption2Value1").value;
-        const valueStart = cronPickerPopup.querySelector("#cronYearOption2Value2").value;
-        cronPickerPopup.querySelector("#resultYear").textContent = `${valueStart}/${valueEvery}`;
-        updateResult();
-    });
-
-    cronPickerPopup.querySelector("#cronYearOption3").addEventListener("click", () => {
-        const value = Array.from(cronPickerPopup.querySelectorAll("#tabYearArea input[type='checkbox']"))
-            .filter(el => el.checked)
-            .map(el => el.value)
-            .join(",");
-        if (value.length === 0) {
-            const year = new Date().getFullYear();
-            cronPickerPopup.querySelector("#resultYear").textContent = year;
-        } else {
-            cronPickerPopup.querySelector("#resultYear").textContent = value;
-        }
-        updateResult();
-    });
-
-    cronPickerPopup.querySelector("#cronYearOption4").addEventListener("click", () => {
-        const valueFrom = cronPickerPopup.querySelector("#cronYearOption4Value1").value;
-        const valueTo = cronPickerPopup.querySelector("#cronYearOption4Value2").value;
-        cronPickerPopup.querySelector("#resultYear").textContent = `${valueFrom}-${valueTo}`;
-        updateResult();
-    });
-
-    cronPickerPopup.querySelectorAll(".selectCronYearOption2").forEach(el => {
-        el.addEventListener("change", () => {
-            cronPickerPopup.querySelector("#cronYearOption2").click();
-        });
-    });
-
-    cronPickerPopup.querySelectorAll(".selectCronYearOption4").forEach(el => {
-        el.addEventListener("change", () => {
-            cronPickerPopup.querySelector("#cronYearOption4").click();
-        });
-    });
-
-    cronPickerPopup.querySelectorAll(".checkBoxCronYearOption3").forEach(el => {
-        el.addEventListener("change", () => {
-            cronPickerPopup.querySelector("#cronYearOption3").click();
         });
     });
 

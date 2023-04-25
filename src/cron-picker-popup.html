@@ -21,16 +21,14 @@
                         <td>Day of month</td>
                         <td>Month</td>
                         <td>Day of week</td>
-                        <td>Year</td>
                     </tr>
                     <tr>
-                        <td ${ !showSeconds ? 'style="display: none;"' : '' } class="col-result"><span id="resultSeconds">*</span></td>
+                        <td ${ !showSeconds ? 'style="display: none;"' : '' } class="col-result"><span id="resultSeconds">0</span></td>
                         <td class="col-result"><span id="resultMinutes">*</span></td>
                         <td class="col-result"><span id="resultHours">*</span></td>
                         <td class="col-result"><span id="resultDayOfMonth">?</span></td>
                         <td class="col-result"><span id="resultMonth">*</span></td>
                         <td class="col-result"><span id="resultDayOfWeek">*</span></td>
-                        <td class="col-result"><span id="resultYear">*</span></td>
                     </tr>
                 </tbody>
             </table>
@@ -41,14 +39,13 @@
                 <button id="tabHours" class="tab white_btn tab_unselected">Hours</button>
                 <button id="tabDay" class="tab white_btn tab_unselected">Day</button>
                 <button id="tabMonth" class="tab white_btn tab_unselected">Month</button>
-                <button id="tabYear" class="tab white_btn tab_unselected">Year</button>
             </div>
 
             <div id="tabDetailArea" class="one_column_box">
                 <div id="tabSecondArea" style="display: none;">
                     <div class="cronOption margin_bottom_10">
                         <label>
-                            <input name="radioSeconds" type="radio" id="cronSecondOption1" checked="checked">
+                            <input name="radioSeconds" type="radio" id="cronSecondOption1">
                             <span for="cronSecondOption1" class="">Every second</span>
                         </label>
                     </div>
@@ -66,7 +63,7 @@
                     </div>
                     <div class="cronOption margin_bottom_5">
                         <label>
-                            <input name="radioSeconds" type="radio" id="cronSecondOption3">
+                            <input name="radioSeconds" type="radio" id="cronSecondOption3" checked="checked">
                             <span for="cronSecondOption3" class="">Specific second (muliple selectable)</span>
                         </label>
                         <div class="specificCheckbox">
@@ -667,47 +664,6 @@
                                     <option value="10">October</option>
                                     <option value="11">November</option>
                                     <option value="12">December</option>
-                                </select>
-                            </span>
-                        </label>
-                    </div>
-                </div>
-
-                <div id="tabYearArea" style="display: none;">
-                    <div class="cronOption margin_bottom_10">
-                        <label>
-                            <input name="radioYear" type="radio" id="cronYearOption1" checked="checked">
-                            <span for="cronYearOption1" class="">Every year</span>
-                        </label>
-                    </div>
-                    <div class="cronOption margin_bottom_10">
-                        <label>
-                            <input name="radioYear" type="radio" id="cronYearOption2">
-                            <span for="cronYearOption2" class="">Every <select id="cronYearOption2Value1"
-                                    class="select selectCronYearOption2">
-
-                                </select>
-                                years starting at year <select id="cronYearOption2Value2"
-                                    class="select selectCronYearOption2">
-
-                                </select>
-                            </span>
-                        </label>
-                    </div>
-                    <div class="cronOption margin_bottom_5">
-                        <label>
-                            <input name="radioYear" type="radio" id="cronYearOption3">
-                            <span for="cronYearOption3" class="">Specific year (choose one or many)</span>
-                        </label>
-                        <div class="specificCheckbox"></div>
-                    </div>
-                    <div class="cronOption margin_bottom_5">
-                        <label>
-                            <input name="radioYear" type="radio" id="cronYearOption4">
-                            <span for="cronYearOption4" class="">Every year between year <select
-                                    id="cronYearOption4Value1" class="select selectCronYearOption4">
-                                </select>
-                                and year <select id="cronYearOption4Value2" class="select selectCronYearOption4">
                                 </select>
                             </span>
                         </label>
