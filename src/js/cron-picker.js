@@ -118,27 +118,27 @@ export const initCronPicker = (element) => {
 
     // Logic
 
-    document.getElementById('generatedCron').value = '0 * * ? * *';
+    document.getElementById('generatedCron').value = '0 0 0 ? JAN *';
 
     document.getElementById('btnCopy').addEventListener('click', function () {
         copyText('generatedCron');
     });
 
     document.getElementById("btnReset").addEventListener("click", () => {
-        document.getElementById("generatedCron").value = "0 * * ? * * *";
+        document.getElementById("generatedCron").value = "0 0 0 ? JAN *";
 
         document.getElementById("resultSeconds").textContent = "0";
-        document.getElementById("resultMinutes").textContent = "*";
-        document.getElementById("resultHours").textContent = "*";
+        document.getElementById("resultMinutes").textContent = "0";
+        document.getElementById("resultHours").textContent = "0";
         document.getElementById("resultDayOfMonth").textContent = "?";
         document.getElementById("resultMonth").textContent = "*";
         document.getElementById("resultDayOfWeek").textContent = "*";
 
         document.getElementById("cronSecondOption3").checked = true;
-        document.getElementById("cronMinuteOption1").checked = true;
-        document.getElementById("cronHourOption1").checked = true;
+        document.getElementById("cronMinuteOption3").checked = true;
+        document.getElementById("cronHourOption3").checked = true;
         document.getElementById("cronDayOption1").checked = true;
-        document.getElementById("cronMonthOption1").checked = true;
+        document.getElementById("cronMonthOption3").checked = true;
 
         document.getElementById("tabMinutes").click();
 

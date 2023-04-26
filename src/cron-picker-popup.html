@@ -24,10 +24,10 @@
                     </tr>
                     <tr>
                         <td ${ !showSeconds ? 'style="display: none;"' : '' } class="col-result"><span id="resultSeconds">0</span></td>
-                        <td class="col-result"><span id="resultMinutes">*</span></td>
-                        <td class="col-result"><span id="resultHours">*</span></td>
+                        <td class="col-result"><span id="resultMinutes">0</span></td>
+                        <td class="col-result"><span id="resultHours">0</span></td>
                         <td class="col-result"><span id="resultDayOfMonth">?</span></td>
-                        <td class="col-result"><span id="resultMonth">*</span></td>
+                        <td class="col-result"><span id="resultMonth">JAN</span></td>
                         <td class="col-result"><span id="resultDayOfWeek">*</span></td>
                     </tr>
                 </tbody>
@@ -88,7 +88,7 @@
                 <div id="tabMinuteArea" style="display: block;">
                     <div class="cronOption margin_bottom_10">
                         <label>
-                            <input name="radioMinutes" type="radio" id="cronMinuteOption1" checked="checked">
+                            <input name="radioMinutes" type="radio" id="cronMinuteOption1">
                             <span for="cronMinuteOption1" class="">Every minute</span>
                         </label>
                     </div>
@@ -107,7 +107,7 @@
                     </div>
                     <div class="cronOption margin_bottom_5">
                         <label>
-                            <input name="radioMinutes" type="radio" id="cronMinuteOption3">
+                            <input name="radioMinutes" type="radio" id="cronMinuteOption3" checked="checked">
                             <span for="cronMinuteOption3" class="">Specific minute (choose one or many)</span>
                         </label>
                         <div class="specificCheckbox">
@@ -132,7 +132,7 @@
                 <div id="tabHourArea" style="display: none;">
                     <div class="cronOption margin_bottom_10">
                         <label>
-                            <input name="radioHours" type="radio" id="cronHourOption1" checked="checked">
+                            <input name="radioHours" type="radio" id="cronHourOption1">
                             <span for="cronHourOption1" class="">Every hour</span>
                         </label>
                     </div>
@@ -152,7 +152,7 @@
                     </div>
                     <div class="cronOption margin_bottom_5">
                         <label>
-                            <input name="radioHours" type="radio" id="cronHourOption3">
+                            <input name="radioHours" type="radio" id="cronHourOption3" checked="checked">
                             <span for="cronHourOption3" class="">Specific hour (choose one or many)</span>
                         </label>
                         <div class="specificCheckbox">
@@ -501,7 +501,7 @@
                 <div id="tabMonthArea" style="display: none;">
                     <div class="cronOption margin_bottom_10">
                         <label>
-                            <input name="radioMonth" type="radio" id="cronMonthOption1" checked="checked">
+                            <input name="radioMonth" type="radio" id="cronMonthOption1">
                             <span for="cronMonthOption1" class="">Every month</span>
                         </label>
                     </div>
@@ -543,7 +543,7 @@
                     </div>
                     <div class="cronOption margin_bottom_5">
                         <label>
-                            <input name="radioMonth" type="radio" id="cronMonthOption3">
+                            <input name="radioMonth" type="radio" id="cronMonthOption3" checked="checked">
                             <span for="cronMonthOption3" class="">Specific month (choose one or many)</span>
                         </label>
                         <div class="specificCheckbox">
