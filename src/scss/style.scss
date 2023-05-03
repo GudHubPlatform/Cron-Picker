@@ -369,9 +369,7 @@ cron-picker {
         padding: 10px 20px 10px 20px;
     }
 
-    .tab_unselected {
-        background-color: #ffffff;
-    }
+    
 
     .tab {
         height: 40px;
@@ -382,8 +380,11 @@ cron-picker {
         border-bottom: 0;
         color: #000;
         margin-right: 5px;
+        background-color: #D4ECFF;
     }
-
+    .tab_unselected {
+        background-color: #ffffff;
+    }
     #tabYear {
         margin-right: 0;
     }
