@@ -15,7 +15,7 @@
             <table class="resultTable margin_bottom_10">
                 <tbody>
                     <tr>
-                        <td ${ !showSeconds ? 'style="display: none;"' : '' }>Seconds</td>
+                        <td>Seconds</td>
                         <td>Minutes</td>
                         <td>Hours</td>
                         <td>Day of month</td>
@@ -23,7 +23,7 @@
                         <td>Day of week</td>
                     </tr>
                     <tr>
-                        <td ${ !showSeconds ? 'style="display: none;"' : '' } class="col-result"><span id="resultSeconds">0</span></td>
+                        <td class="col-result"><span id="resultSeconds">0</span></td>
                         <td class="col-result"><span id="resultMinutes">0</span></td>
                         <td class="col-result"><span id="resultHours">0</span></td>
                         <td class="col-result"><span id="resultDayOfMonth">?</span></td>
@@ -34,7 +34,7 @@
             </table>
 
             <div id="tabArea">
-                ${ showSeconds ? '<button id="tabSeconds" class="tab white_btn tab_unselected">Seconds</button>' : '' }
+                <button id="tabSeconds" class="tab white_btn tab_unselected">Seconds</button>
                 <button id="tabMinutes" class="tab white_btn">Minutes</button>
                 <button id="tabHours" class="tab white_btn tab_unselected">Hours</button>
                 <button id="tabDay" class="tab white_btn tab_unselected">Day</button>
