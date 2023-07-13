@@ -107,7 +107,7 @@ cron-picker {
     .one_column_box {
         width: 100%;
         margin: auto;
-        padding: 20px;
+        padding: 0 20px 20px 20px;
         background-color: #fff;
         border: 1px solid #e6e6e6;
         box-sizing: border-box;
@@ -124,7 +124,7 @@ cron-picker {
     .multi_column_box th,
     .one_column_box td,
     .one_column_box th {
-        padding: 5px 10px;
+        padding: 11px 10px;
     }
 
     .multi_column_box {
@@ -369,9 +369,7 @@ cron-picker {
         padding: 10px 20px 10px 20px;
     }
 
-    .tab_unselected {
-        background-color: #f9f9f9;
-    }
+    
 
     .tab {
         height: 40px;
@@ -382,8 +380,11 @@ cron-picker {
         border-bottom: 0;
         color: #000;
         margin-right: 5px;
+        background-color: #D4ECFF;
     }
-
+    .tab_unselected {
+        background-color: #ffffff;
+    }
     #tabYear {
         margin-right: 0;
     }
@@ -416,6 +417,7 @@ cron-picker {
         border-collapse: collapse;
         padding: 0;
         text-align: center;
+        background-color: #f1f1f1;
     }
 
     .col-result {
@@ -436,6 +438,10 @@ cron-picker {
 
     .headerPart {
         line-height: 35px;
-        font-weight: 700;
+        font-weight: 300;
+        font-size: 30px;
+        margin: 16px 0;
+        color: #0d99ff;
+
     }
 }
