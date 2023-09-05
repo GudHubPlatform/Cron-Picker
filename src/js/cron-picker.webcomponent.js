@@ -14,7 +14,6 @@ class CronPicker extends GhHtmlElement {
 
     onInit() {
         this.showSeconds = this.scope.field_model.data_model?.show_seconds || false;
-
         super.render(input);
     }
 

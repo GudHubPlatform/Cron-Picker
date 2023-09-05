@@ -1,3 +1,5 @@
+import { Cron } from 'croner';
+
 export const initCronPicker = (element) => {
 
     function createOptions(selectElement, start, end, settings) {
@@ -52,6 +54,23 @@ export const initCronPicker = (element) => {
         const dayOfWeek = cronPickerPopup.querySelector('#resultDayOfWeek').textContent;
         const result = `${seconds} ${minutes} ${hours} ${dayOfMonth} ${month} ${dayOfWeek}`;
         cronPickerPopup.querySelector('#generatedCron').value = result;
+
+        const cron = new Cron(result);
+        const nextRuns = cron.nextRuns(5);
+
+        const runs = nextRuns.map((run) => {
+            return `${run.toLocaleDateString('uk')} ${new Date(run).toLocaleTimeString([], { hour: '2-digit', minute:'2-digit', hour12: false })}`;
+        });
+
+        cronPickerPopup.querySelector('.schedule').innerHTML = '';
+
+        runs.forEach((run) => {
+            const scheduleItem = document.createElement('div');
+            scheduleItem.classList.add('schedule__item');
+            scheduleItem.textContent = run;
+            cronPickerPopup.querySelector('.schedule').appendChild(scheduleItem);
+        });
+
     }
     
     function copyText(id) {

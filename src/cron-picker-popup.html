@@ -5,33 +5,40 @@
         </div>
         <div class="one_column_box">
             <div class="headerPart">Cron expression generator</div>
-            <div class="margin_bottom_10">
-                <input id="generatedCron" type="text" readonly="" autocomplete="off">
-                <a id="btnCopy" class="link white_btn button">Copy</a>
-                <a id="btnReset" class="link white_btn button">Reset</a>
-                <button onclick="save()" class="submit button">Save</button>
-            </div>
+            <div class="schedule__wrapper">
+                <div class="input__wrapper">
+                    <div class="margin_bottom_10">
+                        <input id="generatedCron" type="text" readonly="" autocomplete="off">
+                        <a id="btnCopy" class="link white_btn button">Copy</a>
+                        <a id="btnReset" class="link white_btn button">Reset</a>
+                        <button onclick="save()" class="submit button">Save</button>
+                    </div>
 
-            <table class="resultTable margin_bottom_10">
-                <tbody>
-                    <tr>
-                        <td>Seconds</td>
-                        <td>Minutes</td>
-                        <td>Hours</td>
-                        <td>Day of month</td>
-                        <td>Month</td>
-                        <td>Day of week</td>
-                    </tr>
-                    <tr>
-                        <td class="col-result"><span id="resultSeconds">0</span></td>
-                        <td class="col-result"><span id="resultMinutes">0</span></td>
-                        <td class="col-result"><span id="resultHours">0</span></td>
-                        <td class="col-result"><span id="resultDayOfMonth">?</span></td>
-                        <td class="col-result"><span id="resultMonth">JAN</span></td>
-                        <td class="col-result"><span id="resultDayOfWeek">*</span></td>
-                    </tr>
-                </tbody>
-            </table>
+                    <table class="resultTable margin_bottom_10">
+                        <tbody>
+                            <tr>
+                                <td>Seconds</td>
+                                <td>Minutes</td>
+                                <td>Hours</td>
+                                <td>Day of month</td>
+                                <td>Month</td>
+                                <td>Day of week</td>
+                            </tr>
+                            <tr>
+                                <td class="col-result"><span id="resultSeconds">0</span></td>
+                                <td class="col-result"><span id="resultMinutes">0</span></td>
+                                <td class="col-result"><span id="resultHours">0</span></td>
+                                <td class="col-result"><span id="resultDayOfMonth">?</span></td>
+                                <td class="col-result"><span id="resultMonth">JAN</span></td>
+                                <td class="col-result"><span id="resultDayOfWeek">*</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="schedule">
+                    
+                </div>
+            </div>
 
             <div id="tabArea">
                 ${ showSeconds ? '<button id="tabSeconds" class="tab white_btn tab_unselected">Seconds</button>' : '' }
