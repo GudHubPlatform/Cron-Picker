@@ -37,6 +37,8 @@ cron-picker {
                 border: 2px solid #D4ECFF;
                 margin-bottom: 10px;
                 padding: 5px;
+                max-height: 117px;
+                overflow-y: auto;
                 border-radius: 5px;
                 display: flex;
                 flex-direction: column;
@@ -45,7 +47,6 @@ cron-picker {
 
                 &__wrapper {
                     display: flex;
-                    align-items: stretch;
                     justify-content: space-between;
                 }
 

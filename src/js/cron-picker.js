@@ -56,7 +56,7 @@ export const initCronPicker = (element) => {
         cronPickerPopup.querySelector('#generatedCron').value = result;
 
         const cron = new Cron(result);
-        const nextRuns = cron.nextRuns(5);
+        const nextRuns = cron.nextRuns(50);
 
         const runs = nextRuns.map((run) => {
             return `${run.toLocaleDateString('uk')} ${new Date(run).toLocaleTimeString([], { hour: '2-digit', minute:'2-digit', hour12: false })}`;
